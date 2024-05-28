@@ -1,0 +1,44 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style-type: none;
+    text-decoration: none;
+    font-family: Helvetica, sans-serif;
+}
+
+:root {
+    --background: #FBFBEA;
+    /* 默认背景 */
+    --text-color: #000;
+    /* 默认文字颜色 */
+    --accent-color: #AAA;
+    --border-2:2px solid #333;
+    --active-color:#AAA;
+    --text-font:20px bold;
+    /* 默认强调色 */
+    /* 可以继续添加更多的变量 */
+}
+/* 暗模式 */
+[data-theme="dark"] {
+    --background: #333;
+    --text-color: #fff;
+    --accent-color: #111;
+    --border-2:2px solid #999;
+    --active-color:#04AA6D;
+    --text-font:20px bold;
+    /* 其他暗模式颜色 */
+}
+/* 改变进度条的颜色和高度 */
+
+$color-bg:var(--background);
+$color-text:var(--text-color);
+$color-accent:var(--accent-color);
+$border-2:var(--border-2);
+$active-color:var(--active-color);
+// 字体
+$font-stack: Helvetica, sans-serif;
+$text-title:var(--text-font);
+// 表单输入校验颜色
+$is-valid:#198754;
+$is-invalid:#dc3545;

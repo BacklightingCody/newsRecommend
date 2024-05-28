@@ -1,0 +1,32 @@
+$font-stack: Helvetica, sans-serif;
+// 亮暗色调
+$light-background: #fff;
+$light-text: #000;
+$light-accent: #007bff;
+$dark-background: #333;
+$dark-backgroundspace: #555;
+$dark-text: #fff;
+$dark-accent: #111;
+// 宽高
+$full-width: 100%;
+$half-width: 50%;
+$third-width: 33.33%;
+$quarter-width: 25%;
+$full-height: 100%;
+:root {
+  --background: #fff;
+  /* 默认背景 */
+  --text-color: #000;
+  /* 默认文字颜色 */
+  --accent-color: #007bff;
+  /* 默认强调色 */
+  /* 可以继续添加更多的变量 */
+}
+
+/* 暗模式 */
+[data-theme="dark"] {
+  --background: #333;
+  --text-color: #fff;
+  --accent-color: #111;
+  /* 其他暗模式颜色 */
+}
