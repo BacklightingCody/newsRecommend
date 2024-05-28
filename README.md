@@ -23,35 +23,35 @@
 >npm run build
 >
 ### 项目结构
->
->├── README.md                       项目介绍
->├──news
->├──db                               爬虫爬取数据存放到本地数据库mysql
->├── package.json                    npm包配置文件，里面定义了项目的npm脚本，依赖包等信息
->├── src                             源码目录
->│   ├── main.js                         入口js文件
->│   ├── index.html                      项目入口文件
->│   ├── vite.config.js                  vite配置文件
->│   ├── App.vue                         根组件
->│   ├── components                      公共组件目录
->│   ├── assets                          资源目录，这里的资源会被vite构建
->│       ├── imgs
->│   │   └── data                        目前存放一些静态数据
->│   ├── router                          前端路由
->│   │   └── index.js
->│   ├── store                           应用级数据（state）
->│       ├── index.js
->│       └── user.js
->│   ├── styles                          存放scss样式
->│   ├── utils                           工具函数
->│   ├── api                             存放接口函数
->│   └── views                           页面目录
->│       ├── article
->│       ├── home
->│       ├── login
->│       ├── profile
->│       └── NotFound.vue
->
+
+├── README.md                       项目介绍
+├──news
+├──db                               爬虫爬取数据存放到本地数据库mysql
+├── package.json                    npm包配置文件，里面定义了项目的npm脚本，依赖包等信息
+├── src                             源码目录
+│   ├── main.js                         入口js文件
+│   ├── index.html                      项目入口文件
+│   ├── vite.config.js                  vite配置文件
+│   ├── App.vue                         根组件
+│   ├── components                      公共组件目录
+│   ├── assets                          资源目录，这里的资源会被vite构建
+│       ├── imgs
+│   │   └── data                        目前存放一些静态数据
+│   ├── router                          前端路由
+│   │   └── index.js
+│   ├── store                           应用级数据（state）
+│       ├── index.js
+│       └── user.js
+│   ├── styles                          存放scss样式
+│   ├── utils                           工具函数
+│   ├── api                             存放接口函数
+│   └── views                           页面目录
+│       ├── article
+│       ├── home
+│       ├── login
+│       ├── profile
+│       └── NotFound.vue
+
 ## 后端
 
 ### 快速开始
@@ -61,14 +61,14 @@
 >node app.js
 >
 ### 项目结构
->
->├──server
->├──db                               爬虫爬取数据存放到本地数据库mysql
->├── package.json                    npm包配置文件，里面定义了项目的npm脚本，依赖包等信息
->├── app.js                          项目入口文件
->├── database                        存放连接数据库文件
->├── routes                          存放路由
->├── handle_routes                   路由中需要调用的一些函数
->├── middleware                      存放中间件函数
->├── utils                           存放工具函数
->├── api                             接口函数和工具函数
+
+├──server
+├──db                               爬虫爬取数据存放到本地数据库mysql
+├── package.json                    npm包配置文件，里面定义了项目的npm脚本，依赖包等信息
+├── app.js                          项目入口文件
+├── database                        存放连接数据库文件
+├── routes                          存放路由
+├── handle_routes                   路由中需要调用的一些函数
+├── middleware                      存放中间件函数
+├── utils                           存放工具函数
+├── api                             接口函数和工具函数
