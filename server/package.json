@@ -6,6 +6,8 @@
 
     "body-parser": "^1.20.2",
 
+    "connect-mongo": "^5.1.0",
+
     "cors": "^2.8.5",
 
     "crypto": "^1.0.1",
@@ -19,6 +21,8 @@
     "jsonwebtoken": "^9.0.2",
 
     "mongodb": "^6.5.0",
+
+    "mongoose": "^8.4.0",
 
     "mysql": "^2.18.1",
 

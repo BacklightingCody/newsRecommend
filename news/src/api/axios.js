@@ -1,14 +1,13 @@
 // api/axios.js
-
 import axios from 'axios';
-
+axios.defaults.withCredentials = true
 // 创建一个 Axios 实例
 const instance = axios.create({
     baseURL: 'http://localhost:8000', // 后端服务器地址
     timeout: 10000, // 请求超时时间（单位：毫秒）
-    headers: {
-        'Content-Type': 'application/json', // 请求头中的 Content-Type
-    },
+    // headers: {
+    //     'Content-Type': 'application/json', // 请求头中的 Content-Type
+    // },
 });
 
 // 添加请求拦截器
@@ -33,6 +32,8 @@ instance.interceptors.response.use(
     },
     function (error) {
         // 对响应错误做些什么
+        // 统一错误提示
+        ElMessage.error(error.response.message)
         return Promise.reject(error);
     }
 );

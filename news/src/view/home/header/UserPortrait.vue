@@ -46,4 +46,4 @@ const jumpPage = computed(() => {
     object-fit: cover;
   }
 }
-</style>../../stores
+</style>

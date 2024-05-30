@@ -3,11 +3,11 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import { defineConfig } from 'vite'
-
 import vue from '@vitejs/plugin-vue'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: './',
   css: {
     // devSourcemap: true,
     // minify: true,
@@ -44,10 +44,11 @@ export default defineConfig({
     }
   },
   build: {
+
     outDir: 'dist', // 输出目录
     assetsDir: 'assets', // 静态资源输出目录
     rollupOptions: {
-      external: ['axios'], // 指定axios作为外部依赖
+      external: [], // 指定外部依赖
     }
   }
 })

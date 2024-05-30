@@ -33,11 +33,27 @@
         ></span>
         <span v-else class="iconfont icon-nosee" @click="togglePwdType"></span>
       </div>
+      <div class="captcha-box" v-if="captchaImg">
+        <input
+          type="text"
+          v-model="captcha"
+          id="captcha"
+          class="form-control"
+          name="captcha"
+        />
+        <div
+          class="captcha"
+          ref="codeBox"
+          v-html="captchaImg"
+          @click="setCaptcha"
+        ></div>
+      </div>
       <div class="inputBox">
         <button type="submit" value="Login" id="btn" @click="validateAccount">
           Login
         </button>
       </div>
+
       <div class="group">
         <RouterLink to="/forget"><button>Forget password</button></RouterLink>
         <RouterLink to="/signup"><button>Sign up</button></RouterLink>
@@ -58,8 +74,8 @@
 
 <script setup>
 import axiosRequest from "@/api/axios";
-import bcrypt from "bcryptjs";
-import { ref } from "vue";
+import { getCaptcha } from "@/api/getCode";
+import { onMounted, ref } from "vue";
 import { RouterLink } from "vue-router";
 import router from "@/router";
 import { encryptPassword } from "@/api/encrypt";
@@ -69,14 +85,9 @@ const store = useStore();
 // 接收用户名和密码
 const userName = ref(null);
 const userPassword = ref(null);
-const toastInfo = ref({
-  message: "",
-  duration: 3000,
-  isSuccess: false,
-  show: false,
-});
-
-let pwdType = ref("password");
+const captchaImg = ref("");
+const captcha = ref("");
+const pwdType = ref("password");
 function togglePwdType() {
   pwdType.value = pwdType.value === "password" ? "text" : "password";
 }
@@ -90,17 +101,39 @@ const timeconvert = (string) => {
 const formatIpAddress = (ip) => {
   return ip === "::1" ? "127.0.0.1" : ip;
 };
+const setCaptcha = async () => {
+  const res = await getCaptcha();
+  console.log(res.data)
+  captchaImg.value = res.data.data;
+};
+const validate = () => {
+  if (
+    userName.value === "" ||
+    userPassword.value === "" ||
+    captcha.value === ""
+  ) {
+    // ElMessage.error('表单未填写完整')
+    throw Error("表单未填写完整");
+  }
+};
 async function validateAccount() {
   try {
+    validate();
     const password = await encryptPassword(userPassword.value);
     console.log(password);
-    const response = await axiosRequest.post("/api/user/login", {
-      username: userName.value,
-      password,
-    });
+    const response = await axiosRequest.post(
+      "/api/user/login",
+      {
+        username: userName.value,
+        password,
+        captcha: captcha.value,
+      },
+      {
+        withCredentials: true,
+      }
+    );
     if (response.data.success) {
       console.log(response.data);
-
       // 设置仓库存储，以及token到期时间
       store.login(true);
       store.setUserAccesstoken(response.data.data.token);
@@ -121,7 +154,7 @@ async function validateAccount() {
       登录IP：${data.lastLoginIp ? formatIpAddress(data.currentLoginIp) : ""}\n
       登录浏览器：${data.lastLoginBrowser ? data.lastLoginBrowser : ""}`
       );
-      router.replace('/')
+      router.replace("/");
     } else {
       // 显示错误消息
       ElMessage.error(response.data.error);
@@ -130,9 +163,12 @@ async function validateAccount() {
     // 如果请求失败，显示通用错误消息
     console.error("登录失败，未知错误:", error);
     // 显示通用错误消息
-    ElMessage.error("登录失败，请稍后重试");
+    ElMessage.error(error.message);
   }
 }
+onMounted(() => {
+  setCaptcha()
+});
 </script>
 
 
@@ -265,7 +301,30 @@ section h2 {
 .login .inputBox .icon-nosee {
   display: none;
 }
-
+.captcha-box {
+  width: 100% !important;
+  position: relative;
+  height: 50px;
+  outline: none;
+  color: #8f2c2c;
+  border-radius: 5px;
+  background: #fff;
+  border: none;
+  margin-bottom: 20px;
+  display: flex;
+}
+.captcha-box input {
+  width: 60%;
+}
+.captcha {
+  width: 40%;
+  height: 100%;
+}
+.captcha svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 section .flower {
   top: 0;
   left: 0;

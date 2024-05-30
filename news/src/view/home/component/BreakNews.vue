@@ -61,7 +61,7 @@ onMounted(() => {
       text-overflow: ellipsis;
       white-space: nowrap;
       padding: 15px 0;
-      a{
+      a {
         color: inherit;
       }
     }

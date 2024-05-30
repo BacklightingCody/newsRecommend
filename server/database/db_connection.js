@@ -12,7 +12,7 @@ async function connectToDatabase() {
         await client.connect();
         console.log("成功连接到本地 MongoDB！");
 
-        return client.db(); // 无需传递数据库名称，使用默认数据库
+        return client.db("news"); // 无需传递数据库名称，使用默认数据库
     } catch (error) {
         console.error('连接数据库时出错:', error);
         throw error;

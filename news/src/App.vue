@@ -1,7 +1,6 @@
 <script setup>
 import { RouterView, useRoute } from "vue-router";
 import { computed, ref, watch } from "vue";
-import { storeToRefs } from "pinia";
 
 const route = useRoute();
 const key = ref(route.fullPath);
@@ -9,7 +8,7 @@ const key = ref(route.fullPath);
 watch(route, () => {
   key.value = route.fullPath; // 当路由变化时，更新 key，强制重新渲染组件
 });
-const showHomePage = computed(() => route.path !== "/login");
+// const showHomePage = computed(() => route.path !== "/login");
 
 
 

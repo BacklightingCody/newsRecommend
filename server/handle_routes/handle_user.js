@@ -48,7 +48,7 @@ module.exports = {
             throw error;
         }
     },
-    async handleUserLogin(req, username, password) {
+    async handleUserLogin(req, username, password, captcha) {
         try {
             const now = new Date()
             // 通过获取当前时间来判断用户是否处于可登录的时间段
@@ -78,8 +78,14 @@ module.exports = {
                 }
             }
             // 先检查是否填写完整
-            if (!(username && password)) {
+            if (!(username && password && captcha)) {
                 return { success: false, error: '当前表单未填写完整' }
+            }
+            console.log(captcha, 2)
+            console.log(req.session.captcha, 33)
+            // 检查验证码是否正确
+            if (!req.session.captcha || req.session.captcha !== captcha.toLowerCase()) {
+                return { success: false, error: '验证码错误' };
             }
             // 检查是否存在该用户名
             const user = await db.collection('userData').findOne({ username });

@@ -67,26 +67,25 @@ const handleSelect = (item) => {
 .search-container {
   position: relative;
   margin: 0 20px;
-}
-::v-deep .el-autocomplete {
-  width: 600px;
-  transition: all 0.5s ease;
+  :deep(.el-autocomplete) {
+    width: 600px;
+    transition: all 0.5s ease;
 
-  .el-input {
-    flex-grow: 1;
-    width: 100%;
-    height: 40px;
-    outline: none;
+    .el-input {
+      flex-grow: 1;
+      width: 100%;
+      height: 40px;
+      outline: none;
 
-    .el-input__wrapper {
-      background-color: $color-bg;
-      color: $color-text;
+      .el-input__wrapper {
+        background-color: $color-bg;
+        color: $color-text;
+      }
     }
   }
 }
 </style>
 <style lang="scss" scoped>
-
 .suggestion-item a {
   text-decoration: none;
   color: inherit;

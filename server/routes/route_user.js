@@ -11,7 +11,8 @@ const router = express.Router();
 router.get('/captcha', async (req, res) => {
     try {
         const captcha = svgCaptcha.create({ size: 4 });
-        req.session.captcha = captcha.text;
+        req.session.captcha = captcha.text.toLowerCase();
+        console.log(req.session.captcha,11)
         res.type('svg');
         res.status(200).json({ success: true, message: '验证码发送成功', data: captcha.data });
     } catch (error) {
@@ -35,7 +36,7 @@ router.post('/verify', async (req, res) => {
 });
 // 处理前端发起拿到公钥的请求
 router.get('/getKey', (req, res) => {
-    console.log(publicKey)
+    // console.log(publicKey)
     res.status(200).json({ success: true, data: publicKey, message: '获取公钥成功' })
 
 })
@@ -58,8 +59,8 @@ router.post('/signup', async (req, res) => {
 router.post('/login', async (req, res) => {
     try {
         // 从请求体中获取用户名和密码
-        const { username, password } = req.body;
-        const result = await handleUser.handleUserLogin(req, username, password);
+        const { username, password,captcha} = req.body;
+        const result = await handleUser.handleUserLogin(req, username, password,captcha);
         // 返回处理结果给前端
         res.status(200).json(result);
         console.log(result)

@@ -76,16 +76,16 @@ router.beforeEach((to) => {
     if (!Store.userAccount.accessToken && to.path !== '/login' && to.path !== '/signup') {
         return {
             path: '/login',
-            // 保存我们所在的位置，以便以后再来
-            query: { redirect: to.fullPath },
+            // // 保存我们所在的位置，以便以后再来
+            // query: { redirect: to.fullPath },
         }
     }
     if (Store.isExpire() && to.path !== '/login' && to.path !== '/signup') {
         Store.logout()
         return {
             path: '/login',
-            // 保存我们所在的位置，以便以后再来
-            query: { redirect: to.fullPath },
+            // // 保存我们所在的位置，以便以后再来
+            // query: { redirect: to.fullPath },
         }
     }
     return true
