@@ -1,3 +1,4 @@
+<!-- 将来修改流程，前端使用Data Url来预览图片，使用file.reader读取图片为base64格式，然后压缩为blob存储到服务器，服务器需要对blob再转换为base64存储 -->
 <template>
   <section class="profile">
     <div class="profile-container">
@@ -87,12 +88,12 @@ function handleImgInput(e) {
     //并且转换为file格式
     reader.readAsDataURL(file);
     reader.onload = () => {
+      // 准备上传到服务器的image
       imageFile.value = reader.result;
-      // console.log(imageFile.value)
+      // console.log(imageFile.value,11)
     };
+    // 前端预览
     imageUrl.value = URL.createObjectURL(file);
-    // userStore.setUserPortrait(imageUrl.value)
-    console.log(imageUrl.value, 1);
     userPortrait.value.$refs.portraitImg.src = imageUrl.value;
   }
 }
@@ -131,7 +132,7 @@ async function updateAvatar() {
       // 显示成功的消息
       console.log(response.data);
       userStore.setUserPortrait(imageUrl.value);
-      console.log(imageUrl.value, 2);
+      // console.log(imageUrl.value, 2);
       ElMessage.success(response.data.message);
     } else {
       ElMessage.error(response.data.message);
@@ -160,10 +161,9 @@ async function getAvatar() {
     if (response.data.success) {
       // 显示成功的消息
       const userInfo = response.data;
-
       userPortrait.value.$refs.portraitImg.src = response.data.data;
       userStore.setUserPortrait(response.data.data);
-      console.log(userInfo, 1);
+      // console.log(userInfo, 1);
       // 个人信息设置
       ElMessage.success(response.data.message);
     } else {

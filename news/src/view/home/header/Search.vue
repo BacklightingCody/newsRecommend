@@ -1,9 +1,9 @@
 <script setup>
 import { ref } from "vue";
 import { searchQuery } from "@/api/search";
-
+import { RouterLink } from "vue-router";
 const queryString = ref(null);
-
+import router from "@/router";
 const lookfor = async (query) => {
   try {
     const response = await searchQuery(query);
@@ -37,7 +37,22 @@ const searchAsync = (query, cb) => {
 };
 
 const handleSelect = (item) => {
-  console.log(item);
+  console.log(item)
+  if (item) {
+    router.push({
+      name: "articleDetail",
+      params: { id: item.id, category: item.table_name },
+    });
+  }
+  return item;
+};
+const highlight = (text, query) => {
+  if (!query) return text;
+  const regex = new RegExp(`(${query})`, "gi");
+  const hightext = String(regex).replace(/[()/]/g, "").slice(0, -2);
+  // console.log(hightext)
+  console.log(text.replace(hightext, `<em class="highlight">${hightext}</em>`));
+  return text.replace(hightext, `<em class="highlight">${hightext}</em>`);
 };
 </script>
 <template>
@@ -54,7 +69,12 @@ const handleSelect = (item) => {
       </template>
       <template #default="{ item }">
         <div class="suggestion-item">
-          <a :href="item.link" target="_blank" class="link">{{ item.title }}</a>
+          <!-- <a :href="item.link" target="_blank" class="link">{{ item.title }}</a> -->
+          <a
+            target="_blank"
+            class="link"
+            v-html="highlight(item.title, queryString)"
+          ></a>
         </div>
       </template>
     </el-autocomplete>
@@ -84,11 +104,19 @@ const handleSelect = (item) => {
     }
   }
 }
+:deep(.highlight) {
+  font-style: normal;
+  font-weight: 400;
+  background-color: yellow;
+}
 </style>
 <style lang="scss" scoped>
 .suggestion-item a {
   text-decoration: none;
   color: inherit;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .suggestion-item a:hover {

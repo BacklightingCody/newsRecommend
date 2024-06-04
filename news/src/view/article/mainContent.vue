@@ -1,6 +1,5 @@
 
 <script setup>
-
 import GoBack from "./GoBack.vue";
 import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
@@ -15,7 +14,7 @@ const getArticleDetail = async () => {
   const res = await request.get(`/api/article/${category}/${id}`);
   // console.log(res);
   article.value = res.data;
-  console.log(res.data)
+  console.log(res.data);
   // 对article内容需要处理
   if (res.data && res.data.content) {
     content.value = article.value.content
@@ -37,12 +36,14 @@ onMounted(getArticleDetail);
       <section class="content-left" v-if="article?.title">
         <h1>{{ article.title }}</h1>
         <div class="article-info">
-          <span class="info-time">2024 {{ article.time }}</span>
+          <span class="info-time">{{ article.time.includes('2024')?article.time:'2024 '+article.time }}</span>
           <span class="info-author">来源：中国新华网</span>
           <span class="info-font">字体大小操作</span>
         </div>
         <div class="article">
-          <p v-for="(item, index) in content" :key="index">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ item }}。</p>
+          <p v-for="(item, index) in content" :key="index">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ item }}。
+          </p>
         </div>
       </section>
       <section class="content-right"></section>
@@ -86,7 +87,9 @@ onMounted(getArticleDetail);
         font-size: 1.5rem;
         line-height: 1.5;
         padding: 20px;
-
+        p {
+          margin-bottom: 1em;
+        }
       }
     }
     .content-right {

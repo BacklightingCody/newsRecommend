@@ -39,12 +39,6 @@ module.exports = {
                 { $set: { userInfos } }
             );
             console.log(result);
-            // 检查更新是否成功
-            // if (result.modifiedCount === 1) {
-            //     return { success: true, message: '个人信息更新成功' };
-            // } else {
-            //     return { success: false, message: '未找到要更新的用户信息' };
-            // }
             return { success: true, message: '个人信息更新成功' };
         } catch (error) {
             console.error("Error:", error);

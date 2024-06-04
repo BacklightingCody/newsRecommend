@@ -167,7 +167,7 @@ async function getUserInfos() {
     if (response.data.success) {
       // 显示成功的消息
       const userInfo = response.data.data;
-      console.log(userInfo.userInfos);
+      // console.log(userInfo.userInfos);
       // 个人信息设置
       name.value.value = userInfo.userInfos.name;
       addressSelect.value.value = userInfo.userInfos.addressSelect;

@@ -1,6 +1,6 @@
 // const crypto = require('crypto');
 const { generateKeyPairSync } = require('crypto');
- const { publicKey, privateKey } = generateKeyPairSync('rsa', {
+const { publicKey, privateKey } = generateKeyPairSync('rsa', {
   modulusLength: 2048,
   publicKeyEncoding: {
     type: 'spki',
@@ -11,5 +11,5 @@ const { generateKeyPairSync } = require('crypto');
     format: 'pem'
   }
 });
-
+// console.log(publicKey, privateKey)
 module.exports = { publicKey, privateKey }

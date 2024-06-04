@@ -39,6 +39,6 @@ const generateSelectQuery = (table, allColumns, columns, searchText) => {
     const selectColumns = allColumns.map(col => {
         return columns.includes(col) ? `\`${col}\`` : `NULL AS \`${col}\``;
     }).join(', ');
-    return `SELECT '${table}' AS table_name, ${selectColumns} FROM \`${table}\` WHERE title LIKE '%${searchText}%' OR content LIKE '%${searchText}%'`;
+    return `SELECT '${table}' AS table_name, ${selectColumns} FROM \`${table}\` WHERE title LIKE '%${searchText}%'`;
 };
 module.exports = { db, getAllTables, getTableColumns, generateSelectQuery }

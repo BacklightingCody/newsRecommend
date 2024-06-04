@@ -103,7 +103,7 @@ const formatIpAddress = (ip) => {
 };
 const setCaptcha = async () => {
   const res = await getCaptcha();
-  console.log(res.data)
+  console.log(res.data);
   captchaImg.value = res.data.data;
 };
 const validate = () => {
@@ -120,7 +120,7 @@ async function validateAccount() {
   try {
     validate();
     const password = await encryptPassword(userPassword.value);
-    console.log(password);
+    // console.log(password);
     const response = await axiosRequest.post(
       "/api/user/login",
       {
@@ -167,7 +167,7 @@ async function validateAccount() {
   }
 }
 onMounted(() => {
-  setCaptcha()
+  setCaptcha();
 });
 </script>
 

@@ -3,7 +3,8 @@ import { defineProps } from "vue";
 const props = defineProps({
   news: Array,
   title: String,
-  src:String,
+  src: String,
+  category: String,
 });
 // console.log(props.src)
 </script>
@@ -12,7 +13,16 @@ const props = defineProps({
   <div class="news-section-container" v-if="props.news && props.news.length">
     <span class="container-title">{{ props.title }}</span>
     <div class="container-image-text">
-      <div class="container-image"><a :href="props.news[0].link"><img :src="src" alt="" /></a></div>
+      <div class="container-image">
+        <!-- <a :href="props.news[0].link"><img :src="src" alt="" /></a> -->
+        <RouterLink
+        :to="{
+          name: 'articleDetail',
+          params: { id: props.news[0].id, category: props.category },
+        }"
+        ><img :src="src" alt="" /></RouterLink
+      >
+      </div>
       <span v-if="props.news[0]">{{ props.news[0].title }}</span>
     </div>
     <ul>
@@ -21,9 +31,13 @@ const props = defineProps({
         :key="item.id"
         class="news-section-item"
       >
-        <a :href="item.link">
-          {{ item.title }}
-        </a>
+        <RouterLink
+          :to="{
+            name: 'articleDetail',
+            params: { id: item.id, category: props.category },
+          }"
+          >{{ item.title }}</RouterLink
+        >
       </li>
     </ul>
   </div>

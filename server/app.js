@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const express = require('express');
 const cors = require('cors');
 const session = require('express-session');
+const multer = require('multer');
 const useRouterUser = require('./routes/route_user');
 const userRouterUserInfo = require('./routes/route_userInfo');
 const useArticle = require('./routes/route_article')
@@ -22,7 +23,8 @@ mongoose.connect(dbUrl)
 // 添加 CORS 中间件
 app.use(cors(
     {
-        origin: 'http://localhost:5173',
+        // 当切换preview时需要改origin为4173
+        origin: `http://localhost:5173`,
         credentials: true
     }
 ));

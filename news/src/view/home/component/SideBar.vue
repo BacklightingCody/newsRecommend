@@ -6,7 +6,7 @@ import { ref, onMounted } from "vue";
 const sidebarList = ref([]);
 const getNewsList = async () => {
   const res = await getSidebarNews();
-  sidebarList.value = res.data.slice(50, 62);
+  sidebarList.value = res.data.slice(-12);
 };
 onMounted(() => {
   getNewsList();

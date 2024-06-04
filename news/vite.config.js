@@ -50,5 +50,14 @@ export default defineConfig({
     rollupOptions: {
       external: [], // 指定外部依赖
     }
-  }
+  },
+  server: {
+    proxy: {
+      "/api": {
+        target: "http://localhost:3001",
+        changeOrigin: true,
+        // rewrite: (path) => path.replace(/^\/api/, ""),
+      },
+    },
+  },
 })

@@ -8,6 +8,7 @@ async function getPublicKey() {
         // if (response.data.success) {
         //     ElMessage.success(response.data.message)
         // }
+        console.log(response)
         return response.data.data;
     } catch (error) {
         console.error('获取公钥失败:', error);

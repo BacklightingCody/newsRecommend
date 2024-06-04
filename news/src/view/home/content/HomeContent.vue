@@ -57,37 +57,37 @@ const healthNews = ref([]);
 const getPoliticalNews = async () => {
   const res = await getPolitical();
   // console.log(res);
-  politicalNews.value = res.data.slice(0, 5);
+  politicalNews.value = res.data.slice(-5);
 };
 // 获取社会
 const getSocietyNews = async () => {
   const res = await getSociety();
   // console.log(res);
-  societyNews.value = res.data.slice(0, 5);
+  societyNews.value = res.data.slice(-5);
 };
 // 获取国际
 const getInternationalNews = async () => {
   const res = await getInternational();
   // console.log(res);
-  internationalNews.value = res.data.slice(0, 5);
+  internationalNews.value = res.data.slice(-5);
 };
 // 获取财经
 const getEconomyNews = async () => {
   const res = await getEconomy();
   // console.log(res);
-  economyNews.value = res.data.slice(0, 5);
+  economyNews.value = res.data.slice(-5);
 };
 // 获取科技
 const getTechnologyNews = async () => {
   const res = await getTechnology();
   // console.log(res);
-  technologyNews.value = res.data.slice(0, 5);
+  technologyNews.value = res.data.slice(-5);
 };
 // 获取健康
 const getHealthNews = async () => {
   const res = await getHealth();
   // console.log(res);
-  healthNews.value = res.data.slice(0, 5);
+  healthNews.value = res.data.slice(-5);
 };
 onMounted(() => {
   getPoliticalNews();
@@ -133,7 +133,7 @@ onMounted(() => {
         <NewsSectionComponent
           :news="societyNews"
           title="社会"
-          category="社会"
+          category="人居生活"
           :src="imgList[1]"
         ></NewsSectionComponent>
         <NewsSectionComponent

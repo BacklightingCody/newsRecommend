@@ -26,6 +26,7 @@ module.exports = {
                 },
                 Buffer.from(password, 'base64')
             ).toString('utf-8');
+            // console.log('加密的密码',password)
             // console.log('解密后的密码:', decryptedPassword);
             // 对解密的密码哈希化
             const hashedPassword = await bcrypt.hash(decryptedPassword, 10);
@@ -53,7 +54,9 @@ module.exports = {
             const now = new Date()
             // 通过获取当前时间来判断用户是否处于可登录的时间段
             const curretHour = new Date().getHours()
-            if (curretHour >= 23 && curretHour <= 6) {
+            // console.log(curretHour)
+            if (+curretHour >= 22 || curretHour <= 6) {
+                // console.log(1)
                 return { success: false, error: '该时间段不允许登录' }
             }
             // 配置
@@ -81,8 +84,8 @@ module.exports = {
             if (!(username && password && captcha)) {
                 return { success: false, error: '当前表单未填写完整' }
             }
-            console.log(captcha, 2)
-            console.log(req.session.captcha, 33)
+            // console.log(captcha, 2)
+            // console.log(req.session.captcha, 33)
             // 检查验证码是否正确
             if (!req.session.captcha || req.session.captcha !== captcha.toLowerCase()) {
                 return { success: false, error: '验证码错误' };
@@ -110,6 +113,8 @@ module.exports = {
                 },
                 Buffer.from(password, 'base64')
             ).toString('utf-8');
+            // console.log('加密的密码',password)
+            // console.log('解密后的密码:', decryptedPassword);
             // 使用 bcrypt 模块验证密码
             const passwordMatch = await bcrypt.compare(decryptedPassword, user.password);
             if (!passwordMatch) {
@@ -204,5 +209,3 @@ module.exports = {
     },
 };
 
-// 写一下目前进度，暂未实现个人信息存储与个人绑定
-// 暂时先实现了userid,但是未校验
