@@ -14,6 +14,9 @@ export const useStore = defineStore('main', () => {
         console.log(value)
 
     }
+    const getUserId = ()=>{
+        return userAccount.value.userid
+    }
     const setUserId = (value) => {
         userAccount.value.userid = value
     }
@@ -36,6 +39,7 @@ export const useStore = defineStore('main', () => {
         theme,
         login,
         expireTime,
+        getUserId,
         setUserId,
         setUserAccesstoken,
         setExpireTime,

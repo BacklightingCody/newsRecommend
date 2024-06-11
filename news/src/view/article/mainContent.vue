@@ -5,7 +5,12 @@ import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import { RouterView, RouterLink } from "vue-router";
 import request from "@/utils/request";
+import { getDate } from "@/utils/getTime";
 const route = useRoute();
+import { useUserStore } from "@/stores";
+import { useStore } from "@/stores";
+const userStore = useUserStore();
+const store = useStore();
 const category = route.params.category;
 const id = route.params.id;
 const article = ref(null);
@@ -25,7 +30,19 @@ const getArticleDetail = async () => {
   }
 };
 
-onMounted(getArticleDetail);
+// 接下来进行历史记录存储
+const addArtHistory = async () => {
+  const time = getDate();
+  const title = article.value?.title;
+  const userid = store.getUserId();
+  // console.log({ id, category, time, title ,userid});
+  await userStore.addHistory({ id, category, time, title,userid });
+};
+
+onMounted(async () => {
+  await getArticleDetail();
+  await addArtHistory();
+});
 </script>
 <template>
   <div class="main-container">
@@ -36,7 +53,11 @@ onMounted(getArticleDetail);
       <section class="content-left" v-if="article?.title">
         <h1>{{ article.title }}</h1>
         <div class="article-info">
-          <span class="info-time">{{ article.time.includes('2024')?article.time:'2024 '+article.time }}</span>
+          <span class="info-time">{{
+            article.time.includes("2024")
+              ? article.time
+              : "2024 " + article.time
+          }}</span>
           <span class="info-author">来源：中国新华网</span>
           <span class="info-font">字体大小操作</span>
         </div>

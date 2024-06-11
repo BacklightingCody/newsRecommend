@@ -37,7 +37,7 @@ function handleLogOut() {
         <ul>
           <li><router-link to="/personal/profile">Profile</router-link></li>
           <li><router-link to="/personal/security">Security</router-link></li>
-          <li><a href="#">Collection</a></li>
+          <li><router-link to="/personal/collection">Collection</router-link></li>
           <li @click="handleLogOut"><a href="#">LogOut</a></li>
         </ul>
       </aside>

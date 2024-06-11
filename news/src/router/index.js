@@ -2,6 +2,7 @@ import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 import { useStore } from '@/stores/';
 import { createRouter, createWebHistory } from 'vue-router';
+
 const routes = [
     {
         path: '/',
@@ -38,6 +39,7 @@ const routes = [
         children: [
             { path: 'profile', component: () => import('@/view/profile/Profile.vue') },
             { path: 'security', component: () => import('@/view/profile/Security.vue') },
+            { path: 'collection', component: () => import('@/view/profile/Collection.vue') }
         ]
     },
     {
@@ -93,7 +95,7 @@ router.beforeEach((to) => {
 })
 // 全局后置路由检查故障
 router.afterEach((to, from, failure) => {
-    console.log(to.fullPath)
+    // console.log(to.fullPath)
     if (failure) {
         console.log(failure)
         sendToAnalytics(to, from, failure)

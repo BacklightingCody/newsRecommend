@@ -1,5 +1,5 @@
 // const crypto = require('crypto');
-const { generateKeyPairSync } = require('crypto');
+const { generateKeyPairSync } = require('node:crypto');
 const { publicKey, privateKey } = generateKeyPairSync('rsa', {
   modulusLength: 2048,
   publicKeyEncoding: {

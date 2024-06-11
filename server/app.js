@@ -7,7 +7,7 @@ const session = require('express-session');
 const multer = require('multer');
 const useRouterUser = require('./routes/route_user');
 const userRouterUserInfo = require('./routes/route_userInfo');
-const useArticle = require('./routes/route_article')
+const useRouterArticle = require('./routes/route_article')
 const app = express();
 // 导入解析token所需
 const { expressjwt: jwt } = require("express-jwt");
@@ -52,7 +52,7 @@ app.use(
 
 // 使用 routes文件夹中定义的路由
 app.use('/api/user', useRouterUser);
-app.use('/api/article', useArticle)
+app.use('/api/article', useRouterArticle)
 app.use('/profile', userRouterUserInfo);
 app.all("*", function (req, res, next) {
     if (!req.get("Origin")) return next();
@@ -69,7 +69,7 @@ app.all("*", function (req, res, next) {
 app.get('/', (req, res) => {
     res.send('Welcome to the homepage!');
 });
-// 捕获错误
+// 捕获错误的中间件
 app.use((err, req, res, next) => {
     if (err.name === 'UnauthorizedError') return res.send({ success: false, error: '身份认证失败' })
     if (err) {

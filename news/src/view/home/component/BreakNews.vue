@@ -11,7 +11,7 @@ const props = defineProps({
 const newsList = ref([]);
 const getNewsList = async () => {
   const res = await getBreakNews();
-  newsList.value = res.data.slice(1, 15);
+  newsList.value = res.data.slice(-15);
   // console.log(res);
 };
 onMounted(() => {
